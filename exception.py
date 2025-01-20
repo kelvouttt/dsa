@@ -1,0 +1,3 @@
+class EmptyNode(Exception):
+
+    pass
