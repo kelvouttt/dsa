@@ -34,36 +34,63 @@ class LinkedList:
         current.next = Node(data, None)
 
     def add_specific_position(self, data, position):
-        if self.head is None:
-            self.head = Node(data, None)
-            return
-        
         # Get current head in the node
         current = self.head 
-        curr_length = self.length()
         
+        # Get current length of linked list
+        curr_length = self.length()
+
+        # If user enters 1, this is the same as adding to beginning (continue below...)
         if position == 1:
+            # Create new node which points to the current head of the list
             node = Node(data, current)
+            # After creating the new node, we change the value of current head to the newly created node
             self.head = node
             return
+        # If position entered
         elif position > curr_length:
             raise ValueError(f"Position cannot be larger than the total length of the linked list. Current length: [{curr_length}].")
         else:
+            # Underscore variable as we don't care about it, the loop is purely so we can traverse through the list.
             for _ in range(1, position - 1):
                 current = current.next
-                break
             
             node = Node(data, current.next)
             current.next = node
-            node.next = current.next.next
             return
         
+    def delete_node(self, position):
+        # Get current head of node and assign to variable
+        current = self.head
+        length = self.length()
+
+        # Check if linked list is empty
+        if current is None:
+            raise EmptyNode("List is empty. No nodes to delete!")
+        
+        # If position is 1, we can assign the next node in the list as head. Python's GC will handle the deleted node as it is no longer referenced
+        if position == 1:
+            self.head = current.next
+        # For position != 1 and lesser than total length, we can loop just before the node we wish to remove. 
+        # Reference the next node of 'current' to next.next, imagine if we skip referencing the deleted node, and instead reference the one node after.
+        elif position > 1 and position <= length:
+            for _ in range(1, position - 1):
+                current = current.next
+            current.next = current.next.next
+
+    def delete_list(self):
+        if self.head is None:
+            raise  EmptyNode("List is empty. Nothing to delete!")
+        else:
+            self.head = None
+                    
     def length(self):
         if self.head is None:
             raise EmptyNode("List is empty. Please add new node to the linked list!")
         
         current = self.head
         length = 1
+        # As long as the while loop returns true, it will keep traversing to next node and add to the length. 
         while current.next:
             current = current.next
             length += 1
@@ -82,9 +109,9 @@ class LinkedList:
             # Adding if-else condition so the last node will not have the arror at the end as it's not pointing to any node
             if current.next is not None:
             # Loop through the linked list, current.data is the current.head data, and the current.next holds the next node's memory allocation
-                print(f"({current.data}, {current.next})", end=' --> ')
+                print(f"({current.data}: [{current}], {current.next})", end=' --> ')
             else:
-                print(f"({current.data}, {current.next})")
+                print(f"({current.data}: [{current}], {current.next})")
             # The next node memory allocation, we assign to current so we can print it while looping.
             current = current.next
 
@@ -93,6 +120,6 @@ if __name__ == '__main__':
     ll = LinkedList()
     ll.add_to_first(2)
     ll.add_node(-10)
-    ll.add_specific_position(8, 2)
-    ll.add_specific_position(10,3)
+    ll.add_node(775)
+    ll.delete_list()
     ll.print()
