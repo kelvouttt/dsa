@@ -1,4 +1,4 @@
-from exception import *
+from exception import EmptyNode
 
 class Node:
     def __init__(self, data, next=None):
@@ -10,6 +10,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
+    # Add node from the start
     def add_to_first(self, data):
         # This method creates new node, focus on the arguments passed. 
         # data refers to whichever value this new node has.
@@ -18,7 +19,7 @@ class LinkedList:
         new_node = Node(data, self.head)
         self.head = new_node
 
-    # We assume add_node method is just to add node from the last of the node
+    # Add node from the end
     def add_node(self, data):
         if self.head is None:
             self.head = Node(data, None)
@@ -33,7 +34,8 @@ class LinkedList:
         # If there is no next node, set the next node as Node(data, None), focus on how we create new node with pointer 'None' as the newly created node will be at the last. 
         current.next = Node(data, None)
 
-    def add_specific_position(self, data, position):
+    # Add node from specific position
+    def add_node_pos(self, data, position):
         # Get current head in the node
         current = self.head 
         
@@ -59,6 +61,7 @@ class LinkedList:
             current.next = node
             return
         
+    # Delete node from certain position
     def delete_node(self, position):
         # Get current head of node and assign to variable
         current = self.head
@@ -78,6 +81,7 @@ class LinkedList:
                 current = current.next
             current.next = current.next.next
 
+    # Delete the whole linked list
     def delete_list(self):
         if self.head is None:
             raise  EmptyNode("List is empty. Nothing to delete!")
@@ -115,11 +119,5 @@ class LinkedList:
             # The next node memory allocation, we assign to current so we can print it while looping.
             current = current.next
 
-                     
 if __name__ == '__main__':
-    ll = LinkedList()
-    ll.add_to_first(2)
-    ll.add_node(-10)
-    ll.add_node(775)
-    ll.delete_list()
-    ll.print()
+    pass
