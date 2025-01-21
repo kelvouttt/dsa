@@ -49,7 +49,7 @@ class LinkedList:
             # After creating the new node, we change the value of current head to the newly created node
             self.head = node
             return
-        # If position entered
+        # If position entered is bigger than actual length of list, will raise an error
         elif position > curr_length:
             raise ValueError(f"Position cannot be larger than the total length of the linked list. Current length: [{curr_length}].")
         else:
