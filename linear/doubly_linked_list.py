@@ -1,5 +1,3 @@
-from exception import EmptyList
-
 class Node:
     def __init__(self, data, prev=None, next=None):
         self.data = data
@@ -47,7 +45,7 @@ class DoublyLinkedList:
         length = self.length()
 
         if current is None:
-            raise EmptyList('List is empty. Please add new node to the linked list!')
+            raise ValueError('List is empty. Please add new node to the linked list!')
         
         if position == 1:
             node = Node(data, None, self.head)
@@ -74,7 +72,7 @@ class DoublyLinkedList:
         length = self.length()
 
         if current is None:
-            raise EmptyList("List is empty. No nodes to delete!")
+            raise ValueError("List is empty. No nodes to delete!")
         
         if position == 1:
             self.head = current.next
@@ -98,7 +96,7 @@ class DoublyLinkedList:
         length = self.length()
 
         if current is None:
-            raise EmptyList('Empty linked list, cannot get any node')
+            raise ValueError('Empty linked list, cannot get any node')
         
         if position == 1:
             print(f"[prev: {current.prev} | data: {current.data} | next: {current.next}]")

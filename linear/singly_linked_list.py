@@ -1,5 +1,3 @@
-from exception import EmptyNode
-
 class Node:
     def __init__(self, data, next=None):
         self.data = data
@@ -69,7 +67,7 @@ class LinkedList:
 
         # Check if linked list is empty
         if current is None:
-            raise EmptyNode("List is empty. No nodes to delete!")
+            raise ValueError("List is empty. No nodes to delete!")
         
         # If position is 1, we can assign the next node in the list as head. Python's GC will handle the deleted node as it is no longer referenced
         if position == 1:
@@ -84,13 +82,13 @@ class LinkedList:
     # Delete the whole linked list
     def delete_list(self):
         if self.head is None:
-            raise  EmptyNode("List is empty. Nothing to delete!")
+            raise  ValueError("List is empty. Nothing to delete!")
         else:
             self.head = None
                     
     def length(self):
         if self.head is None:
-            raise EmptyNode("List is empty. Please add new node to the linked list!")
+            raise ValueError("List is empty. Please add new node to the linked list!")
         
         current = self.head
         length = 1
