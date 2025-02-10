@@ -54,6 +54,7 @@ class LinkedList:
             # Underscore variable as we don't care about it, the loop is purely so we can traverse through the list.
             for _ in range(1, position - 1):
                 current = current.next
+            print(current.data)
             
             node = Node(data, current.next)
             current.next = node
@@ -118,4 +119,8 @@ class LinkedList:
             current = current.next
 
 if __name__ == '__main__':
-    pass
+    ll = LinkedList()
+    ll.add_to_first(10)
+    ll.add_node(-9)
+    ll.add_node_pos(-82,2)
+    ll.print()
